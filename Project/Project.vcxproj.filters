@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\imageControl">
+      <UniqueIdentifier>{cd501559-2232-45d5-92f1-d92e5cffd26e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\featureDetection">
+      <UniqueIdentifier>{ddbf235d-387f-4152-b5a0-5757138406b3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imageOp.cpp">
+      <Filter>Source Files\imageControl</Filter>
+    </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgShow.cpp">
+      <Filter>Source Files\imageControl</Filter>
+    </ClCompile>
+    <ClCompile Include="harris_featureDetection.cpp">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="shi_tomasi_featureDetection.cpp">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="shift_FeatureDetection.cpp">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="surf_FeatureDetection.cpp">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="fast_FeatureDetection.cpp">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="imageControl.h">
+      <Filter>Source Files\imageControl</Filter>
+    </ClInclude>
+    <ClInclude Include="imageOp.h">
+      <Filter>Source Files\imageControl</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgShow.h">
+      <Filter>Source Files\imageControl</Filter>
+    </ClInclude>
+    <ClInclude Include="harris_featureDetection.h">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="featureDetection.h">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="shi_tomasi_featureDetection.h">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="shift_FeatureDetection.h">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="surf_FeatureDetection.h">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="fast_FeatureDetection.h">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
