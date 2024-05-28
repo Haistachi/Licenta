@@ -32,18 +32,23 @@ int main()
 	Mat sift_gray = gray.clone();
 	Mat sift = detectShif(sift_gray);
 	showFeature("SIFT feature", sift);
-	/*
-	//SURF
-	cout << "SURF" << endl;
-	Mat surf_gray = gray.clone();
-	Mat surf = detectSurf(surf_gray);
-	showFeature("SURF feature", surf);
-	*/
+	//ORB
+	cout << "ORB" << endl;
+	Mat orb_gray = gray.clone();
+	Mat orb = detectOrb(orb_gray);
+	showFeature("ORB feature", orb);
 	//FAST
 	cout << "FAST" << endl;
 	Mat fast_gray = gray.clone();
 	Mat fast = detectFast(fast_gray);
 	showFeature("FAST feature", fast);
+	//Log-Gabor
+	cout << "Log-Gabor" << endl;
+	Mat lg_gray = gray.clone();
+	Mat lg = detectLogGabor(lg_gray);
+	imshow("Lg test", lg);
+	showFeature("Log-Gabor feature", lg);
+
 	waitKey(0);
 	return 0;
 }

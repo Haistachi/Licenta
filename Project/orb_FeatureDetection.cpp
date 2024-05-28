@@ -1,19 +1,20 @@
-#include "shift_FeatureDetection.h"
 #include "stdafx.h"
+#include "orb_FeatureDetection.h"
+#include <opencv2/xfeatures2d/nonfree.hpp>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 using namespace cv;
 
-Mat detectShif(Mat& src_gray)
+
+Mat detectOrb(Mat& src_gray)
 {
-	//Creare SIFT
-	Ptr<SIFT> detector = SIFT::create();
-	//Detectare si descriptor
+	Ptr<ORB> orb = ORB::create();
 	vector<KeyPoint> keypoints;
+	orb->detect(src_gray, keypoints);
 	Mat descriptors;
-	detector->detectAndCompute(src_gray, noArray(), keypoints, descriptors);
+	orb->compute(src_gray, keypoints, descriptors);
 
 	sort(keypoints.begin(), keypoints.end(), [](const KeyPoint& a, const KeyPoint& b) {
 		return a.response > b.response;
@@ -21,9 +22,9 @@ Mat detectShif(Mat& src_gray)
 	int maxKeypoints = 100; // Set the maximum number of keypoints you want
 	if (keypoints.size() > maxKeypoints) {
 		keypoints.resize(maxKeypoints);
+		descriptors = descriptors.rowRange(0, maxKeypoints);
 	}
 
-	//Desenare keypoints
 	Mat img_keypoints;
 	drawKeypoints(src_gray, keypoints, img_keypoints, Scalar::all(-1), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
 

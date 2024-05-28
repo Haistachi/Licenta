@@ -1,4 +1,4 @@
 #include "stdafx.h"
 #pragma once
 
-Mat detectSurf(Mat& src_gray);
+Mat detectOrb(Mat& src_gray);

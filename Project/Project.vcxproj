@@ -137,7 +137,7 @@
     <ClCompile Include="shift_FeatureDetection.cpp" />
     <ClCompile Include="shi_tomasi_FeatureDetection.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="surf_FeatureDetection.cpp" />
+    <ClCompile Include="orb_FeatureDetection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
@@ -151,7 +151,7 @@
     <ClInclude Include="shift_FeatureDetection.h" />
     <ClInclude Include="shi_tomasi_FeatureDetection.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="surf_FeatureDetection.h" />
+    <ClInclude Include="orb_FeatureDetection.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -45,7 +45,7 @@
     <ClCompile Include="shift_FeatureDetection.cpp">
       <Filter>Source Files\featureDetection</Filter>
     </ClCompile>
-    <ClCompile Include="surf_FeatureDetection.cpp">
+    <ClCompile Include="orb_FeatureDetection.cpp">
       <Filter>Source Files\featureDetection</Filter>
     </ClCompile>
     <ClCompile Include="fast_FeatureDetection.cpp">
@@ -83,7 +83,7 @@
     <ClInclude Include="shift_FeatureDetection.h">
       <Filter>Source Files\featureDetection</Filter>
     </ClInclude>
-    <ClInclude Include="surf_FeatureDetection.h">
+    <ClInclude Include="orb_FeatureDetection.h">
       <Filter>Source Files\featureDetection</Filter>
     </ClInclude>
     <ClInclude Include="fast_FeatureDetection.h">
