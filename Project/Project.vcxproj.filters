@@ -36,10 +36,10 @@
     <ClCompile Include="imgShow.cpp">
       <Filter>Source Files\imageControl</Filter>
     </ClCompile>
-    <ClCompile Include="harris_featureDetection.cpp">
+    <ClCompile Include="harris_FeatureDetection.cpp">
       <Filter>Source Files\featureDetection</Filter>
     </ClCompile>
-    <ClCompile Include="shi_tomasi_featureDetection.cpp">
+    <ClCompile Include="shi_tomasi_FeatureDetection.cpp">
       <Filter>Source Files\featureDetection</Filter>
     </ClCompile>
     <ClCompile Include="shift_FeatureDetection.cpp">
@@ -49,6 +49,9 @@
       <Filter>Source Files\featureDetection</Filter>
     </ClCompile>
     <ClCompile Include="fast_FeatureDetection.cpp">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="log_gabor_FeatureDetection.cpp">
       <Filter>Source Files\featureDetection</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,13 +71,13 @@
     <ClInclude Include="imgShow.h">
       <Filter>Source Files\imageControl</Filter>
     </ClInclude>
-    <ClInclude Include="harris_featureDetection.h">
+    <ClInclude Include="harris_FeatureDetection.h">
       <Filter>Source Files\featureDetection</Filter>
     </ClInclude>
     <ClInclude Include="featureDetection.h">
       <Filter>Source Files\featureDetection</Filter>
     </ClInclude>
-    <ClInclude Include="shi_tomasi_featureDetection.h">
+    <ClInclude Include="shi_tomasi_FeatureDetection.h">
       <Filter>Source Files\featureDetection</Filter>
     </ClInclude>
     <ClInclude Include="shift_FeatureDetection.h">
@@ -84,6 +87,9 @@
       <Filter>Source Files\featureDetection</Filter>
     </ClInclude>
     <ClInclude Include="fast_FeatureDetection.h">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="log_gabor_FeatureDetection.h">
       <Filter>Source Files\featureDetection</Filter>
     </ClInclude>
   </ItemGroup>

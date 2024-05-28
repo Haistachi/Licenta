@@ -42,7 +42,7 @@ int main()
 	//FAST
 	cout << "FAST" << endl;
 	Mat fast_gray = gray.clone();
-	Mat fast = detectSurf(fast_gray);
+	Mat fast = detectFast(fast_gray);
 	showFeature("FAST feature", fast);
 	waitKey(0);
 	return 0;

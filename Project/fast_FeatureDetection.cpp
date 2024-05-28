@@ -6,7 +6,7 @@ using namespace std;
 using namespace cv;
 using namespace cv::xfeatures2d;
 
-Mat detectFast(Mat src_gray)
+Mat detectFast(Mat& src_gray)
 {
     Ptr<FastFeatureDetector> detector = FastFeatureDetector::create();
     vector<KeyPoint> keypoints;

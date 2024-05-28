@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "shi_tomasi_featureDetection.h"
+#include "shi_tomasi_FeatureDetection.h"
 
 using namespace cv;
 using namespace std;

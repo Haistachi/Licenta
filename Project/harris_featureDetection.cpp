@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "harris_featureDetection.h"
+#include "harris_FeatureDetection.h"
 
 using namespace std;
 
