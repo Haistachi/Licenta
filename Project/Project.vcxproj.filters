@@ -19,6 +19,15 @@
     <Filter Include="Source Files\featureDetection">
       <UniqueIdentifier>{ddbf235d-387f-4152-b5a0-5757138406b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{c948a3a3-045d-4e13-bfa2-794dd4623522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FeatureDetection">
+      <UniqueIdentifier>{e830e27b-66bf-44cd-87b5-37f00aced614}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\imageControl">
+      <UniqueIdentifier>{96c7d1fd-d096-4253-b226-9ca016a318e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -29,9 +38,6 @@
     </ClCompile>
     <ClCompile Include="imageOp.cpp">
       <Filter>Source Files\imageControl</Filter>
-    </ClCompile>
-    <ClCompile Include="common.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imgShow.cpp">
       <Filter>Source Files\imageControl</Filter>
@@ -54,43 +60,46 @@
     <ClCompile Include="log_gabor_FeatureDetection.cpp">
       <Filter>Source Files\featureDetection</Filter>
     </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="imageControl.h">
-      <Filter>Source Files\imageControl</Filter>
-    </ClInclude>
-    <ClInclude Include="imageOp.h">
-      <Filter>Source Files\imageControl</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="common.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imgShow.h">
-      <Filter>Source Files\imageControl</Filter>
-    </ClInclude>
-    <ClInclude Include="harris_FeatureDetection.h">
-      <Filter>Source Files\featureDetection</Filter>
-    </ClInclude>
-    <ClInclude Include="featureDetection.h">
-      <Filter>Source Files\featureDetection</Filter>
-    </ClInclude>
-    <ClInclude Include="shi_tomasi_FeatureDetection.h">
-      <Filter>Source Files\featureDetection</Filter>
-    </ClInclude>
-    <ClInclude Include="shift_FeatureDetection.h">
-      <Filter>Source Files\featureDetection</Filter>
-    </ClInclude>
-    <ClInclude Include="orb_FeatureDetection.h">
-      <Filter>Source Files\featureDetection</Filter>
+      <Filter>Source Files\common</Filter>
     </ClInclude>
     <ClInclude Include="fast_FeatureDetection.h">
-      <Filter>Source Files\featureDetection</Filter>
+      <Filter>Header Files\FeatureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="featureDetection.h">
+      <Filter>Header Files\FeatureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="harris_FeatureDetection.h">
+      <Filter>Header Files\FeatureDetection</Filter>
     </ClInclude>
     <ClInclude Include="log_gabor_FeatureDetection.h">
-      <Filter>Source Files\featureDetection</Filter>
+      <Filter>Header Files\FeatureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="shi_tomasi_FeatureDetection.h">
+      <Filter>Header Files\FeatureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="shift_FeatureDetection.h">
+      <Filter>Header Files\FeatureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="orb_FeatureDetection.h">
+      <Filter>Header Files\FeatureDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="imageControl.h">
+      <Filter>Header Files\imageControl</Filter>
+    </ClInclude>
+    <ClInclude Include="imageOp.h">
+      <Filter>Header Files\imageControl</Filter>
+    </ClInclude>
+    <ClInclude Include="imgShow.h">
+      <Filter>Header Files\imageControl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
