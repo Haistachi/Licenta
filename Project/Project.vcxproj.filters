@@ -28,6 +28,12 @@
     <Filter Include="Header Files\imageControl">
       <UniqueIdentifier>{96c7d1fd-d096-4253-b226-9ca016a318e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\featureDescriptor">
+      <UniqueIdentifier>{955b3178-d350-401d-a634-85a979076b44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imageSttiching">
+      <UniqueIdentifier>{72b00304-faff-4ec7-902c-f8c339033d6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
