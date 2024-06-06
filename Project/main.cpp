@@ -12,8 +12,8 @@ int main()
 	std::vector<Point2f> stc;
 	src = readImage().clone();
 
-	double lam = 1.5;
-	double sig_fs = 0.55;
+	double lam = 1.2; // wavelength
+	double sig_fs = 0.55; // sigmaOnf
 	double C = 3.0; //scaling factor
 	double k = 1.3;
 
@@ -56,7 +56,10 @@ int main()
 	cout << "Log-Gabor" << endl;
 	Mat lg_gray = gray.clone();
 	Mat lg = detectLogGabor(lg_gray, sig_fs, lam);
+	//Mat lg = testLogGaborFillter(lg_gray);
 	showFeature("Log-Gabor feature", lg);
+	lg = testLogGaborFillter(lg_gray);
+
 
 	waitKey(0);
 	return 0;

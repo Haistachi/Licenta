@@ -2,6 +2,7 @@
 #include "imageOp.h"
 
 using namespace cv;
+using namespace std;
 
 std::string openFileDialog() {
     char filename[MAX_PATH] = "";
@@ -35,4 +36,14 @@ Mat readImage()
 void convertToGray(Mat& src, Mat& dst)
 {
 	cvtColor(src, dst, CV_RGB2GRAY);
+}
+
+void limitKeyPoints(vector<KeyPoint> &keypoints, int maxKeypoints)
+{
+    sort(keypoints.begin(), keypoints.end(), [](const KeyPoint& a, const KeyPoint& b) {
+        return a.response > b.response;
+        });
+    if (keypoints.size() > maxKeypoints) {
+        keypoints.resize(maxKeypoints);
+    }
 }

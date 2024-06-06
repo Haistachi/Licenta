@@ -14,6 +14,8 @@
 #include <windows.h>
 #include <CommDlg.h>
 #include <ShlObj.h>
+#include <vector>
+#include <algorithm>
 
 using namespace cv;
 
