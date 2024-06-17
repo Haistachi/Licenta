@@ -276,8 +276,20 @@ Mat detectLogGaborV2(Mat& src_gray, double sig_fs, double lam, double theta_o)
     merge(planes, 2, complexI);
     // Fourier Transform
     dft(complexI, complexI); 
+
+    // compute the magnitude and switch to logarithmic scale
+    // => log(1 + sqrt(Re(DFT(I))^2 + Im(DFT(I))^2))
+    split(complexI, planes); // planes[0] = Re(DFT(I), planes[1] = Im(DFT(I))
+    magnitude(planes[0], planes[1], planes[0]);// planes[0] = magnitude
+    Mat magI = planes[0];
+    magI += Scalar::all(1); // switch to logarithmic scale
+    log(magI, magI);
+    // crop the spectrum, if it has an odd number of rows or columns
+    magI = magI(Rect(0, 0, magI.cols & -2, magI.rows & -2));
+
     // Shift the Fourier image
     fftShift(complexI, complexI);
+    fftShift(magI, magI);
     // Apply the filter
      Mat filterPlanes[] = { filter, filter };
      Mat complexFilter;
@@ -294,7 +306,9 @@ Mat detectLogGaborV2(Mat& src_gray, double sig_fs, double lam, double theta_o)
     // Normalize for display
      normalize(realPart, realPart, 0, 1,  NORM_MINMAX);
      normalize(imaginaryPart, imaginaryPart, 0, 1,  NORM_MINMAX);
+     normalize(magI, magI, 0, 1, NORM_MINMAX);
 
+     imshow("spectrum magnitude", magI);
     imshow("Real Part (Even-symmetric)", realPart);
     imshow("Imaginary Part (Odd-symmetric)", imaginaryPart);
     imshow("Normalized Radius", radius);
