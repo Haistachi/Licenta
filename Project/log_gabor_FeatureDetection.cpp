@@ -156,7 +156,7 @@ Mat createLogGaborFilter(const Mat& radius, double wavelength, double sigmaOnf) 
     return logGabor;
 }
 
-Mat createLowPassFilter(const cv::Mat& radius, float cutoff, float sharpness) {
+Mat createLowPassFilter(const Mat& radius, float cutoff, float sharpness) {
     int rows = radius.rows;
     int cols = radius.cols;
     Mat lowPassFilter(rows, cols, CV_32F);
@@ -215,8 +215,31 @@ Mat createAngularComponent(int cols, int rows, float angl, float thetaSigma) {
     return spread;
 }
 
+// Function to shift the zero-frequency component to the center of the spectrum
+void fftShift(const  Mat& input,  Mat& output) {
+    output = input.clone();
+    int cx = output.cols / 2;
+    int cy = output.rows / 2;
+
+     Mat q0(output,  Rect(0, 0, cx, cy));   // Top-Left - Create a ROI per quadrant
+     Mat q1(output,  Rect(cx, 0, cx, cy));  // Top-Right
+     Mat q2(output,  Rect(0, cy, cx, cy));  // Bottom-Left
+     Mat q3(output,  Rect(cx, cy, cx, cy)); // Bottom-Right
+
+     Mat tmp;                                   // Swap quadrants (Top-Left with Bottom-Right)
+    q0.copyTo(tmp);
+    q3.copyTo(q0);
+    tmp.copyTo(q3);
+
+    q1.copyTo(tmp);                                // Swap quadrant (Top-Right with Bottom-Left)
+    q2.copyTo(q1);
+    tmp.copyTo(q2);
+}
+
 Mat detectLogGaborV2(Mat& src_gray, double sig_fs, double lam, double theta_o)
 {
+    //Make the filter
+
     int rows = src_gray.rows;
     int cols = src_gray.cols;
     Mat radius=createNormalizedRadius(rows, cols);
@@ -234,43 +257,46 @@ Mat detectLogGaborV2(Mat& src_gray, double sig_fs, double lam, double theta_o)
 
     float angl = CV_PI / 4; // Example angle in radians
     float thetaSigma = 0.6; // Example thetaSigma
-    // Create the angular component
     Mat spread = createAngularComponent(rows, cols, angl, thetaSigma);
 
     Mat filter;
     multiply(spread, logGaborFiltered, filter);
 
-    Mat srcf = src_gray.clone();
-    srcf.convertTo(srcf, CV_32FC1);
-    centering_transform(srcf);
-    Mat fourier;
-    dft(srcf, fourier, DFT_COMPLEX_OUTPUT);
-    Mat channels[] = { Mat::zeros(src_gray.size(), CV_32F), Mat::zeros(src_gray.size(), CV_32F) };
-    split(fourier, channels); // channels[0] = Re(DFT(I)), channels[1] = Im(DFT(I))
-    Mat mag, phi, g(srcf.size(), CV_32F);
-    magnitude(channels[0], channels[1], mag);
-    phase(channels[0], channels[1], phi);
 
-    multiply(mag, filter, mag);
-    multiply(phi, filter, phi);
+    // Perform Fourier Transform on the image
 
-    //centering_transform(mag);
-    //centering_transform(phi);
+    //Expand the image to an optimal size
+    Mat padded;
+    int m = getOptimalDFTSize(rows);
+    int n = getOptimalDFTSize(cols); // On the border add zero values
+    copyMakeBorder(src_gray, padded, 0, m - rows, 0, n - cols, BORDER_CONSTANT, Scalar::all(0));
+    //Make place for both the complex and the real values
+    Mat planes[] = { Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F) };
+    Mat complexI;
+    merge(planes, 2, complexI);
+    // Fourier Transform
+    dft(complexI, complexI); 
+    // Shift the Fourier image
+    fftShift(complexI, complexI);
+    // Apply the filter
+     Mat filterPlanes[] = { filter, filter };
+     Mat complexFilter;
+     merge(filterPlanes, 2, complexFilter);
+     mulSpectrums(complexI, complexFilter, complexI, 0);
+    // Shift back
+    fftShift(complexI, complexI);
+    // Perform inverse Fourier Transform
+    idft(complexI, complexI,  DFT_SCALE |  DFT_REAL_OUTPUT);
+    // Split the real and imaginary parts
+     split(complexI, planes);
+     Mat realPart = planes[0]; // Even-symmetric component
+     Mat imaginaryPart = planes[1]; // Odd-symmetric component
+    // Normalize for display
+     normalize(realPart, realPart, 0, 1,  NORM_MINMAX);
+     normalize(imaginaryPart, imaginaryPart, 0, 1,  NORM_MINMAX);
 
-    polarToCart(mag, phi, channels[0], channels[1]);
-    Mat dst, dstf;
-    merge(channels, 2, fourier);
-    dft(fourier, dstf, DFT_INVERSE | DFT_REAL_OUTPUT | DFT_SCALE);
-    //transformarea de centrare inversă
-    centering_transform(dstf);
-    //normalizarea rezultatului în imaginea destinație
-    dstf.convertTo(dst, CV_8UC1);
-    mag.convertTo(mag, CV_8UC1);
-    phi.convertTo(phi, CV_8UC1);
-
-    imshow("Image", dst);
-    imshow("Real Part (Even-symmetric)", mag);
-    imshow("Imaginary Part (Odd-symmetric)", phi);
+    imshow("Real Part (Even-symmetric)", realPart);
+    imshow("Imaginary Part (Odd-symmetric)", imaginaryPart);
     imshow("Normalized Radius", radius);
     imshow("Log-Gabor Filter", logGabor);
     imshow("Low-Pass Filter", lowPassFilter);

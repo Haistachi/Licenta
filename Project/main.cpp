@@ -56,10 +56,8 @@ int main()
 	//Log-Gabor
 	cout << "Log-Gabor" << endl;
 	Mat lg_gray = gray.clone();
-	//Mat lg = detectLogGabor(lg_gray, sig_fs, lam, theta_o);
-	//Mat lg = testLogGaborFillter(lg_gray);
-	//showFeature("Log-Gabor feature", lg);
-	//lg = testLogGaborFillter(lg_gray);
+	//Mat lg1 = detectLogGabor(lg_gray, sig_fs, lam, theta_o);
+	//showFeature("Log-Gabor feature", lg1);
 
 	Mat lg = detectLogGaborV2(lg_gray, sig_fs, lam, theta_o);
 	waitKey(0);
