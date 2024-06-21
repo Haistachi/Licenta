@@ -171,66 +171,57 @@ Mat createLowPassFilter(const Mat& radius, float cutoff, float sharpness) {
 }
 
 Mat createAngularComponent(int cols, int rows, float angl, float thetaSigma) {
-    
-    Mat x, y;
-    std::vector<float> x_range(cols);
-    std::vector<float> y_range(rows);
-    for (int i = 0; i < cols; ++i) { x_range[i] = (i - cols / 2.0) / cols; }
-    for (int i = 0; i < rows; ++i) { y_range[i] = (i - rows / 2.0) / rows; }
-    repeat(Mat(y_range).reshape(1, 1), cols, 1, y);
-    repeat(Mat(x_range).reshape(1, 1).t(), 1, rows, x);
+    Mat x = Mat::zeros(rows, cols, CV_32F);
+    Mat y = Mat::zeros(rows, cols, CV_32F);
 
-    Mat theta(rows, cols, CV_32F);
-    Mat sintheta(rows, cols, CV_32F);
-    Mat costheta(rows, cols, CV_32F);
-    Mat spread(rows, cols, CV_32F);
-
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            theta.at<float>(i, j) = atan2(-y.at<float>(i, j), x.at<float>(i, j));
-            sintheta.at<float>(i, j) = sin(theta.at<float>(i, j));
-            costheta.at<float>(i, j) = cos(theta.at<float>(i, j));
+    // Create meshgrid
+    float x_val, y_val;
+    for (int i = 0; i < rows; i++) {
+        y_val = (i - rows / 2.0f) / rows;
+        for (int j = 0; j < cols; j++) {
+            x_val = (j - cols / 2.0f) / cols;
+            x.at<float>(i, j) = x_val;
+            y.at<float>(i, j) = y_val;
         }
     }
 
-    float cosAngl = cos(angl);
-    float sinAngl = sin(angl);
-
-    Mat ds = sintheta * cosAngl - costheta * sinAngl; // Difference in sine.
-    Mat dc = costheta * cosAngl + sintheta * sinAngl; // Difference in cosine.
-    Mat dtheta(rows, cols, CV_32F);
+    // Calculate angle (theta) and angular spread
+    Mat theta = Mat::zeros(rows, cols, CV_32F);
+    Mat spread = Mat::zeros(rows, cols, CV_32F);
 
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
-            dtheta.at<float>(i, j) = abs(atan2(ds.at<float>(i, j), dc.at<float>(i, j)));
+            float angle = atan2(-y.at<float>(i, j), x.at<float>(i, j));
+            float deltaTheta = abs(angle - angl);
+            deltaTheta = min(deltaTheta, float(2 * CV_PI) - deltaTheta); // Correct difference in angles
+            spread.at<float>(i, j) = exp(-pow(deltaTheta, 2) / (2 * pow(thetaSigma, 2)));
         }
     }
 
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            spread.at<float>(i, j) = exp(-pow(dtheta.at<float>(i, j), 2) / (2 * pow(thetaSigma, 2)));
-        }
-    }
     return spread;
 }
 
 // Function to shift the zero-frequency component to the center of the spectrum
-void fftShift(const  Mat& input,  Mat& output) {
-    output = input.clone();
+void fftShift(const Mat& input, Mat& output) {
+    output = input.clone(); // Ensure the output is a separate copy
     int cx = output.cols / 2;
     int cy = output.rows / 2;
 
-     Mat q0(output,  Rect(0, 0, cx, cy));   // Top-Left - Create a ROI per quadrant
-     Mat q1(output,  Rect(cx, 0, cx, cy));  // Top-Right
-     Mat q2(output,  Rect(0, cy, cx, cy));  // Bottom-Left
-     Mat q3(output,  Rect(cx, cy, cx, cy)); // Bottom-Right
+    // Create ROI for each quadrant
+    Mat q0(output, Rect(0, 0, cx, cy));   // Top-Left
+    Mat q1(output, Rect(cx, 0, cx, cy));  // Top-Right
+    Mat q2(output, Rect(0, cy, cx, cy));  // Bottom-Left
+    Mat q3(output, Rect(cx, cy, cx, cy)); // Bottom-Right
 
-     Mat tmp;                                   // Swap quadrants (Top-Left with Bottom-Right)
+    Mat tmp; // Temporary matrix for swapping
+
+    // Swap quadrants (Top-Left with Bottom-Right)
     q0.copyTo(tmp);
     q3.copyTo(q0);
     tmp.copyTo(q3);
 
-    q1.copyTo(tmp);                                // Swap quadrant (Top-Right with Bottom-Left)
+    // Swap quadrants (Top-Right with Bottom-Left)
+    q1.copyTo(tmp);
     q2.copyTo(q1);
     tmp.copyTo(q2);
 }
