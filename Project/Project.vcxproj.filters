@@ -69,6 +69,9 @@
     <ClCompile Include="common.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files\featureDetection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="imgShow.h">
       <Filter>Header Files\imageControl</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>Header Files\FeatureDetection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

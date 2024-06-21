@@ -60,6 +60,7 @@ int main()
 	//showFeature("Log-Gabor feature", lg1);
 
 	Mat lg = detectLogGaborV2(lg_gray, sig_fs, lam, theta_o);
+	//test(gray);
 	waitKey(0);
 	return 0;
 }
