@@ -226,6 +226,56 @@ void fftShift(const Mat& input, Mat& output) {
     tmp.copyTo(q2);
 }
 
+void visualizeFourierComponents(const Mat& complexI) {
+    // Split the complex image into its real and imaginary parts
+    Mat planes[2];
+    split(complexI, planes);
+    Mat realPart = planes[0];
+    Mat imaginaryPart = planes[1];
+
+    // Calculate the magnitude
+    Mat magnitudeImage;
+    magnitude(realPart, imaginaryPart, magnitudeImage);
+
+    // Calculate the phase
+    Mat phaseImage;
+    phase(realPart, imaginaryPart, phaseImage);
+
+    // Switch to logarithmic scale to enhance visibility
+    magnitudeImage += Scalar::all(1); // Avoid log(0) by adding 1
+    log(magnitudeImage, magnitudeImage);
+
+    // Normalize the magnitude image to [0, 1] for display
+    normalize(magnitudeImage, magnitudeImage, 0, 1, NORM_MINMAX);
+
+    // Normalize the phase image to [0, 1] for display
+    normalize(phaseImage, phaseImage, 0, 1, NORM_MINMAX);
+
+    // Display the magnitude and phase
+    imshow("Magnitude", magnitudeImage);
+    imshow("Phase", phaseImage);
+}
+
+void applyFilterManually(Mat& complexI, const Mat& filter) {
+    // Split the complex image into real and imaginary parts
+    Mat planes[2];
+    split(complexI, planes);
+    Mat realPart = planes[0];
+    Mat imaginaryPart = planes[1];
+
+    // The filter is real; thus, we can directly multiply it
+    // Multiply the real part of the Fourier-transformed image with the filter
+    Mat filteredRealPart;
+    multiply(realPart, filter, filteredRealPart);
+
+    // Multiply the imaginary part of the Fourier-transformed image with the filter
+    Mat filteredImaginaryPart;
+    multiply(imaginaryPart, filter, filteredImaginaryPart);
+
+    // Merge the filtered real and imaginary parts back into a complex matrix
+    merge(vector<Mat>{filteredRealPart, filteredImaginaryPart}, complexI);
+}
+
 Mat detectLogGaborV2(Mat& src_gray, double sig_fs, double lam, double theta_o)
 {
     //Make the filter
@@ -266,7 +316,7 @@ Mat detectLogGaborV2(Mat& src_gray, double sig_fs, double lam, double theta_o)
     merge(planes, 2, complexI);
     // Fourier Transform
     dft(complexI, complexI); 
-
+    visualizeFourierComponents(complexI);
     // compute the magnitude and switch to logarithmic scale
     // => log(1 + sqrt(Re(DFT(I))^2 + Im(DFT(I))^2))
     split(complexI, planes); // planes[0] = Re(DFT(I), planes[1] = Im(DFT(I))
@@ -279,7 +329,10 @@ Mat detectLogGaborV2(Mat& src_gray, double sig_fs, double lam, double theta_o)
      Mat filterPlanes[] = { filter, filter };
      Mat complexFilter;
      merge(filterPlanes, 2, complexFilter);
-     mulSpectrums(complexI, complexFilter, complexI, 0);
+
+     //mulSpectrums(complexI, complexFilter, complexI, 0);
+     applyFilterManually(complexI, filter);
+
     // Shift back
     fftShift(complexI, complexI);
     // Perform inverse Fourier Transform
@@ -294,11 +347,6 @@ Mat detectLogGaborV2(Mat& src_gray, double sig_fs, double lam, double theta_o)
 
     imshow("Real Part (Even-symmetric)", realPart);
     imshow("Imaginary Part (Odd-symmetric)", imaginaryPart);
-    //imshow("Normalized Radius", radius);
-    //imshow("Log-Gabor Filter", logGabor);
-    //imshow("Low-Pass Filter", lowPassFilter);
-    //imshow("Log-Gabor * Low-Pass", logGaborFiltered);
-    //imshow("Angular Component", spread);
     imshow("Combined Filter", filter);
     return logGabor;
 }
