@@ -18,6 +18,7 @@
 #include <algorithm>
 
 using namespace cv;
+using namespace std;
 
 #define PI 3.14159265
 #define POS_INFINITY 1e30

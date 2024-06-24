@@ -59,9 +59,10 @@ int main()
 	//Mat lg1 = detectLogGabor(lg_gray, sig_fs, lam, theta_o);
 	//showFeature("Log-Gabor feature", lg1);
 
-	Mat lg = detectLogGaborV2(lg_gray, sig_fs, lam, theta_o);
-	showFeature("Log-Gabor feature", lg);
+	//Mat lg = detectLogGaborV2(lg_gray, sig_fs, lam, theta_o);
+	//showFeature("Log-Gabor feature", lg);
 	//test(gray);
+	applyFilterBankToImage(gray, 5, 8);
 	waitKey(0);
 	return 0;
 }

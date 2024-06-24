@@ -350,3 +350,73 @@ Mat detectLogGaborV2(Mat& src_gray, double sig_fs, double lam, double theta_o)
     imshow("Combined Filter", filter);
     return logGabor;
 }
+
+vector<Mat> logGaborFilterBank(int rows, int cols, int numScales, int numOrientations)
+{
+    vector<Mat> filterBank;
+    Mat finalFilter, logGaborFilter, radius, angularComponent, lowPass;
+    //Example values
+    //Log-Gabor filter
+    double lambda = 0.5; // wavelength, lambda
+    double sigma_fs = 0.85; // sigmaOnf, radian bandwidth of Bf
+    //Angular component filter
+    double thetaSigma = 0.6; //filter orientation angle
+    float angl = CV_PI / 4; // angle in radians
+    //LowPass filter
+    float cutoff = 0.4;
+    float sharpness = 10;
+
+    radius = createNormalizedRadius(rows, cols);
+    for (int s = 0; s < numScales; ++s) {
+
+        lambda = pow(2.0, s + 2);
+        logGaborFilter = createLogGaborFilter(radius, lambda, 0.55);
+
+        for (int o = 0; o < numOrientations; ++o) {
+
+            angl = o * CV_PI / numOrientations;
+            angularComponent = createAngularComponent(cols, rows, angl, CV_PI / numOrientations);
+            //lowPass = createLowPassFilter(radius, cutoff, sharpness);
+            //multiply(logGaborFilter, lowPass, logGaborFilter);
+            multiply(logGaborFilter, angularComponent, finalFilter);
+            filterBank.push_back(finalFilter);
+        }
+    }
+    return filterBank;
+}
+
+void applyFilterBankToImage(const Mat& graySrc, int numScales, int numOrientations) {
+
+    // Convert to float and normalize
+    Mat srcFloat;
+    graySrc.convertTo(srcFloat, CV_32F, 1.0 / 255.0);
+
+    // Compute the DFT of the image
+    Mat dftImage;
+    dft(srcFloat, dftImage, DFT_COMPLEX_OUTPUT);
+
+    // Generate the filter bank
+    vector<Mat> filterBank = logGaborFilterBank(graySrc.rows, graySrc.cols, numScales, numOrientations);
+
+    // Apply each filter
+    for (const Mat& filter : filterBank) {
+        // Multiply DFT of image with the filter
+        Mat filteredDft;
+        mulSpectrums(dftImage, filter, filteredDft, 0);
+
+        // Compute the inverse DFT to get the filtered image
+        Mat filteredImage;
+        idft(filteredDft, filteredImage, DFT_SCALE | DFT_REAL_OUTPUT);
+
+        // Process the filtered image to extract features
+        // For example, thresholding
+        Mat thresholdedImage;
+        threshold(filteredImage, thresholdedImage, 0.5, 1.0, THRESH_BINARY);
+
+        // Display or process the thresholded image
+        imshow("Filtered Image", thresholdedImage);
+        waitKey(0);
+
+        // Here you can also implement non-maximum suppression, feature marking, etc.
+    }
+}
