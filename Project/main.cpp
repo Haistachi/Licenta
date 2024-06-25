@@ -12,11 +12,12 @@ int main()
 	std::vector<Point2f> stc;
 	src = readImage().clone();
 
-	double lam = 0.5; // wavelength, lambda
-	double sig_fs = 0.85; // sigmaOnf, radian bandwidth of Bf
+	double lam = 3; // wavelength, lambda
+	double sig_fs = 0.7; // sigmaOnf, radian bandwidth of Bf
 	double C = 3.0; //scaling factor
 	double k = 1.3;
-	double theta_o = 5; //filter orientation angle
+	double angl = CV_PI/4; //filter orientation angle
+	double theta_o = 0.5;
 
 	//procesare initiala
 	imshow("src", src);
@@ -56,13 +57,10 @@ int main()
 	//Log-Gabor
 	cout << "Log-Gabor" << endl;
 	Mat lg_gray = gray.clone();
-	//Mat lg1 = detectLogGabor(lg_gray, sig_fs, lam, theta_o);
-	//showFeature("Log-Gabor feature", lg1);
+	Mat lg = detectLogGabor(lg_gray, angl, sig_fs, lam, theta_o);
+	showFeature("Log-Gabor feature", lg);
 
-	//Mat lg = detectLogGaborV2(lg_gray, sig_fs, lam, theta_o);
-	//showFeature("Log-Gabor feature", lg);
-	//test(gray);
-	applyFilterBankToImage(gray, 5, 8);
+	//applyFilterBankToImage(gray, 5, 8);
 	waitKey(0);
 	return 0;
 }

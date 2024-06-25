@@ -5,4 +5,3 @@
 #include "orb_FeatureDetection.h"
 #include "fast_FeatureDetection.h"
 #include "log_gabor_FeatureDetection.h"
-#include "test.h"
