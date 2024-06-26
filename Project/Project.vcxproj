@@ -127,31 +127,52 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bfm_FeatureMatching.cpp" />
+    <ClCompile Include="blending_ImageStitching.cpp" />
+    <ClCompile Include="brief_FeatureDescriptor.cpp" />
     <ClCompile Include="common.cpp" />
     <ClCompile Include="fast_FeatureDetection.cpp" />
+    <ClCompile Include="flann_FeatureMatching.cpp" />
+    <ClCompile Include="freak_FeatureDescriptor.cpp" />
     <ClCompile Include="harris_FeatureDetection.cpp" />
     <ClCompile Include="imageOp.cpp" />
     <ClCompile Include="imgShow.cpp" />
     <ClCompile Include="log_gabor_FeatureDetection.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="orb_FeatureDescriptor.cpp" />
+    <ClCompile Include="ransac_ImageStitching.cpp" />
     <ClCompile Include="shift_FeatureDetection.cpp" />
     <ClCompile Include="shi_tomasi_FeatureDetection.cpp" />
+    <ClCompile Include="sift_FeatureDescriptor.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="orb_FeatureDetection.cpp" />
+    <ClCompile Include="warp_perspective_ImageStitching.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bfm_FeatureMatching.h" />
+    <ClInclude Include="blending_ImageStitching.h" />
+    <ClInclude Include="brief_FeatureDescriptor.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="fast_FeatureDetection.h" />
+    <ClInclude Include="featureDescriptor.h" />
     <ClInclude Include="featureDetection.h" />
+    <ClInclude Include="featureMatching.h" />
+    <ClInclude Include="flann_FeatureMatching.h" />
+    <ClInclude Include="freak_FeatureDescriptor.h" />
     <ClInclude Include="harris_FeatureDetection.h" />
     <ClInclude Include="imageControl.h" />
     <ClInclude Include="imageOp.h" />
+    <ClInclude Include="ImageStitching.h" />
     <ClInclude Include="imgShow.h" />
     <ClInclude Include="log_gabor_FeatureDetection.h" />
+    <ClInclude Include="orb_FeatureDescriptor.h" />
+    <ClInclude Include="ransac_ImageStitching.h" />
     <ClInclude Include="shift_FeatureDetection.h" />
     <ClInclude Include="shi_tomasi_FeatureDetection.h" />
+    <ClInclude Include="sift_FeatureDescriptor.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="orb_FeatureDetection.h" />
+    <ClInclude Include="warp_perspective_ImageStitching.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,9 +3,6 @@
 #include "imageControl.h"
 #include "featureDetection.h"
 
-using namespace std;
-
-
 int main()
 {
 	Mat src, dst, ch, st, gray, har;

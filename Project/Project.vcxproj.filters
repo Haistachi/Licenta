@@ -22,9 +22,6 @@
     <Filter Include="Source Files\common">
       <UniqueIdentifier>{c948a3a3-045d-4e13-bfa2-794dd4623522}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\FeatureDetection">
-      <UniqueIdentifier>{e830e27b-66bf-44cd-87b5-37f00aced614}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\imageControl">
       <UniqueIdentifier>{96c7d1fd-d096-4253-b226-9ca016a318e3}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,21 @@
     </Filter>
     <Filter Include="Source Files\imageSttiching">
       <UniqueIdentifier>{72b00304-faff-4ec7-902c-f8c339033d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\featureDetectionHeader">
+      <UniqueIdentifier>{e830e27b-66bf-44cd-87b5-37f00aced614}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\featureDescriptorHeader">
+      <UniqueIdentifier>{736af541-0675-48b5-9dbb-9d3e962f070f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\imageStitchingHeader">
+      <UniqueIdentifier>{5f80c72a-0766-4e50-a4ca-7326d544395f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\featureMatchingHeader">
+      <UniqueIdentifier>{ab8b12b1-ba38-442b-9c0a-0885d391c1d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\featureMatching">
+      <UniqueIdentifier>{ffa5cfb9-d7ce-4c91-a054-c9e8a5a226e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +81,33 @@
     <ClCompile Include="common.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
+    <ClCompile Include="sift_FeatureDescriptor.cpp">
+      <Filter>Source Files\featureDescriptor</Filter>
+    </ClCompile>
+    <ClCompile Include="brief_FeatureDescriptor.cpp">
+      <Filter>Source Files\featureDescriptor</Filter>
+    </ClCompile>
+    <ClCompile Include="freak_FeatureDescriptor.cpp">
+      <Filter>Source Files\featureDescriptor</Filter>
+    </ClCompile>
+    <ClCompile Include="orb_FeatureDescriptor.cpp">
+      <Filter>Source Files\featureDescriptor</Filter>
+    </ClCompile>
+    <ClCompile Include="bfm_FeatureMatching.cpp">
+      <Filter>Source Files\featureMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="flann_FeatureMatching.cpp">
+      <Filter>Source Files\featureMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="ransac_ImageStitching.cpp">
+      <Filter>Source Files\imageSttiching</Filter>
+    </ClCompile>
+    <ClCompile Include="warp_perspective_ImageStitching.cpp">
+      <Filter>Source Files\imageSttiching</Filter>
+    </ClCompile>
+    <ClCompile Include="blending_ImageStitching.cpp">
+      <Filter>Source Files\imageSttiching</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -78,25 +117,25 @@
       <Filter>Source Files\common</Filter>
     </ClInclude>
     <ClInclude Include="fast_FeatureDetection.h">
-      <Filter>Header Files\FeatureDetection</Filter>
+      <Filter>Header Files\featureDetectionHeader</Filter>
     </ClInclude>
     <ClInclude Include="featureDetection.h">
-      <Filter>Header Files\FeatureDetection</Filter>
+      <Filter>Header Files\featureDetectionHeader</Filter>
     </ClInclude>
     <ClInclude Include="harris_FeatureDetection.h">
-      <Filter>Header Files\FeatureDetection</Filter>
+      <Filter>Header Files\featureDetectionHeader</Filter>
     </ClInclude>
     <ClInclude Include="log_gabor_FeatureDetection.h">
-      <Filter>Header Files\FeatureDetection</Filter>
+      <Filter>Header Files\featureDetectionHeader</Filter>
     </ClInclude>
     <ClInclude Include="shi_tomasi_FeatureDetection.h">
-      <Filter>Header Files\FeatureDetection</Filter>
+      <Filter>Header Files\featureDetectionHeader</Filter>
     </ClInclude>
     <ClInclude Include="shift_FeatureDetection.h">
-      <Filter>Header Files\FeatureDetection</Filter>
+      <Filter>Header Files\featureDetectionHeader</Filter>
     </ClInclude>
     <ClInclude Include="orb_FeatureDetection.h">
-      <Filter>Header Files\FeatureDetection</Filter>
+      <Filter>Header Files\featureDetectionHeader</Filter>
     </ClInclude>
     <ClInclude Include="imageControl.h">
       <Filter>Header Files\imageControl</Filter>
@@ -106,6 +145,42 @@
     </ClInclude>
     <ClInclude Include="imgShow.h">
       <Filter>Header Files\imageControl</Filter>
+    </ClInclude>
+    <ClInclude Include="bfm_FeatureMatching.h">
+      <Filter>Header Files\featureMatchingHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="flann_FeatureMatching.h">
+      <Filter>Header Files\featureMatchingHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="featureMatching.h">
+      <Filter>Header Files\featureMatchingHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="brief_FeatureDescriptor.h">
+      <Filter>Header Files\featureDescriptorHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="freak_FeatureDescriptor.h">
+      <Filter>Header Files\featureDescriptorHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="orb_FeatureDescriptor.h">
+      <Filter>Header Files\featureDescriptorHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="sift_FeatureDescriptor.h">
+      <Filter>Header Files\featureDescriptorHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="featureDescriptor.h">
+      <Filter>Header Files\featureDescriptorHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageStitching.h">
+      <Filter>Header Files\imageStitchingHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="blending_ImageStitching.h">
+      <Filter>Header Files\imageStitchingHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="ransac_ImageStitching.h">
+      <Filter>Header Files\imageStitchingHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="warp_perspective_ImageStitching.h">
+      <Filter>Header Files\imageStitchingHeader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
