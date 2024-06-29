@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "harris_FeatureDetection.h"
-
-using namespace std;
+#include <opencv2/imgproc.hpp>
+#include <opencv2/features2d.hpp> 
 
 void detectCornerHarris(Mat& src_gray, Mat& dst)
 {
@@ -24,4 +24,14 @@ vector<Point2f> detectHarris(Mat& src_gray)
 	goodFeaturesToTrack(src_gray, c, maxCorners, qualityLevel, minDistance, Mat(), blockSize, useHarrisDetector, k);
 
 	return c;
+}
+
+vector<KeyPoint> harrisDetectKeyPoints(Mat& image)
+{
+	vector<Point2f> corners = detectHarris(image);
+	vector<KeyPoint> keyPoints;
+	for (Point2f corner : corners) {
+		keyPoints.push_back(KeyPoint(corner, 1.f));
+	}
+	return keyPoints;
 }

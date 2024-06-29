@@ -296,3 +296,13 @@ void applyFilterBankToImage(const Mat& graySrc, int numScales, int numOrientatio
         // Here you can also implement non-maximum suppression, feature marking, etc.
     }
 }
+
+vector<KeyPoint> logGaborDetectKeyPoints(Mat& image) {
+	applyFilterBankToImage(image, 3, 8);
+
+	// Perform keypoint detection using the filtered images
+	vector<KeyPoint> keypoints;
+	// Implement keypoint detection using the filtered images
+
+	return keypoints;
+}

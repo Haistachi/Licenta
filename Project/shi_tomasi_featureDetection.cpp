@@ -29,3 +29,13 @@ void showFeature(Mat dst, vector<Point2f> corners)
 
 	imshow("source_window", dst);
 }
+
+vector<KeyPoint> shiTomasiDetectKeyPoints(Mat& image)
+{
+	vector<Point2f> corners = detectShiTomasi(image);
+	vector<KeyPoint> keyPoints;
+	for (Point2f corner : corners) {
+		keyPoints.push_back(KeyPoint(corner, 1.f));
+	}
+	return keyPoints;
+}
