@@ -5,7 +5,7 @@
 
 using namespace cv::xfeatures2d;
 
-Mat ComputeDescriptors(const Mat& image, vector<KeyPoint>& keyPoints)
+Mat briefDescriptors(const Mat& image, vector<KeyPoint>& keyPoints)
 {
     Ptr<BriefDescriptorExtractor> featureExtractor = BriefDescriptorExtractor::create();
     Mat descriptors;
