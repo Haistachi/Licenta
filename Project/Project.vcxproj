@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bfm_FeatureMatching.cpp" />
-    <ClCompile Include="blending_ImageStitching.cpp" />
     <ClCompile Include="brief_FeatureDescriptor.cpp" />
     <ClCompile Include="common.cpp" />
     <ClCompile Include="fast_FeatureDetection.cpp" />
@@ -146,11 +145,10 @@
     <ClCompile Include="sift_FeatureDescriptor.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="orb_FeatureDetection.cpp" />
-    <ClCompile Include="warp_perspective_ImageStitching.cpp" />
+    <ClCompile Include="warpPerspective&amp;Blending_ImageStitching.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bfm_FeatureMatching.h" />
-    <ClInclude Include="blending_ImageStitching.h" />
     <ClInclude Include="brief_FeatureDescriptor.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="fast_FeatureDetection.h" />
@@ -172,7 +170,7 @@
     <ClInclude Include="sift_FeatureDescriptor.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="orb_FeatureDetection.h" />
-    <ClInclude Include="warp_perspective_ImageStitching.h" />
+    <ClInclude Include="warpPerspective&amp;Blending_ImageStitching.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

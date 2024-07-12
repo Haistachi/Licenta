@@ -1,4 +1,3 @@
-#include "blending_ImageStitching.h"
 #include "ransac_ImageStitching.h"
-#include "warp_perspective_ImageStitching.h"
+#include "warpPerspective&Blending_ImageStitching.h"
 #pragma once

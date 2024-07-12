@@ -102,10 +102,7 @@
     <ClCompile Include="ransac_ImageStitching.cpp">
       <Filter>Source Files\imageSttiching</Filter>
     </ClCompile>
-    <ClCompile Include="warp_perspective_ImageStitching.cpp">
-      <Filter>Source Files\imageSttiching</Filter>
-    </ClCompile>
-    <ClCompile Include="blending_ImageStitching.cpp">
+    <ClCompile Include="warpPerspective&amp;Blending_ImageStitching.cpp">
       <Filter>Source Files\imageSttiching</Filter>
     </ClCompile>
   </ItemGroup>
@@ -173,13 +170,10 @@
     <ClInclude Include="ImageStitching.h">
       <Filter>Header Files\imageStitchingHeader</Filter>
     </ClInclude>
-    <ClInclude Include="blending_ImageStitching.h">
-      <Filter>Header Files\imageStitchingHeader</Filter>
-    </ClInclude>
     <ClInclude Include="ransac_ImageStitching.h">
       <Filter>Header Files\imageStitchingHeader</Filter>
     </ClInclude>
-    <ClInclude Include="warp_perspective_ImageStitching.h">
+    <ClInclude Include="warpPerspective&amp;Blending_ImageStitching.h">
       <Filter>Header Files\imageStitchingHeader</Filter>
     </ClInclude>
   </ItemGroup>

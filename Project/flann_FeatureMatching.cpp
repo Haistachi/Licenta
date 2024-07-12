@@ -3,7 +3,7 @@
 
 vector<DMatch> flannfeatureMatching(Mat& src_gray1, Mat& src_gray2,
 	Mat& descriptors1, Mat& descriptors2,
-	vector<KeyPoint> keypoints1, vector<KeyPoint> keypoints2, string alg)
+	vector<KeyPoint> keypoints1, vector<KeyPoint> keypoints2)
 {
     // Convert descriptors to the type CV_32F needed for FLANN
     if (descriptors1.type() != CV_32F) {
@@ -31,7 +31,7 @@ vector<DMatch> flannfeatureMatching(Mat& src_gray1, Mat& src_gray2,
 }
 
 vector<DMatch> flannfeatureMatching(Mat& src_gray1, Mat& src_gray2,
-	Mat& descriptors1, Mat& descriptors2, string alg)
+	Mat& descriptors1, Mat& descriptors2)
 {
     if (descriptors1.type() != CV_32F) {
         descriptors1.convertTo(descriptors1, CV_32F);
