@@ -46,6 +46,15 @@
     <Filter Include="Source Files\featureMatching">
       <UniqueIdentifier>{ffa5cfb9-d7ce-4c91-a054-c9e8a5a226e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="images">
+      <UniqueIdentifier>{78f0bbc0-73d7-4135-a8a7-c97013423d58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images\office">
+      <UniqueIdentifier>{281100b2-73de-412b-9948-6f1ec3e176c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="images\facade">
+      <UniqueIdentifier>{91b6ab71-457e-4fd7-8c25-235cef246c6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,7 +137,7 @@
     <ClInclude Include="shi_tomasi_FeatureDetection.h">
       <Filter>Header Files\featureDetectionHeader</Filter>
     </ClInclude>
-    <ClInclude Include="shift_FeatureDetection.h">
+    <ClInclude Include="sift_FeatureDetection.h">
       <Filter>Header Files\featureDetectionHeader</Filter>
     </ClInclude>
     <ClInclude Include="orb_FeatureDetection.h">
@@ -176,5 +185,19 @@
     <ClInclude Include="warpPerspective&amp;Blending_ImageStitching.h">
       <Filter>Header Files\imageStitchingHeader</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Materiale\office\DSC_0220.JPG">
+      <Filter>images\office</Filter>
+    </Image>
+    <Image Include="..\Materiale\office\DSC_0219.JPG">
+      <Filter>images\office</Filter>
+    </Image>
+    <Image Include="..\Materiale\facade\DSC_0362.JPG">
+      <Filter>images\facade</Filter>
+    </Image>
+    <Image Include="..\Materiale\facade\DSC_0363.JPG">
+      <Filter>images\facade</Filter>
+    </Image>
   </ItemGroup>
 </Project>

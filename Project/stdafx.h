@@ -27,5 +27,7 @@ using namespace std;
 #define min_(x,y) ((x) < (y) ? (x) : (y))
 #define isNan(x) ((x) != (x) ? 1 : 0)
 
+#define maxDisplayHeight 540.0
+
 #pragma once
 

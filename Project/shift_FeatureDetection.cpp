@@ -1,8 +1,8 @@
-#include "shift_FeatureDetection.h"
+#include "sift_FeatureDetection.h"
 #include "stdafx.h"
 #include "imageControl.h"
 
-Mat detectShif(Mat& src_gray)
+Mat detectSift(Mat& src_gray)
 {
 	Ptr<SIFT> detector = SIFT::create();
 	vector<KeyPoint> keypoints;
@@ -16,7 +16,7 @@ Mat detectShif(Mat& src_gray)
 	return img_keypoints;
 }
 
-vector<KeyPoint> shifDetectKeyPoints(Mat& image)
+vector<KeyPoint> siftDetectKeyPoints(Mat& image)
 {
 	Ptr<SIFT> detector = SIFT::create();
 	vector<KeyPoint> keypoints;

@@ -60,19 +60,17 @@ vector<DMatch> bfmFeatureMatching(Mat& src_gray1, Mat& src_gray2,
 	vector<DMatch> matches;
 	matcher.match(descriptors1, descriptors2, matches);
 
-	//Filter matches and find homography.
-	double max_dist = 0; double min_dist = 100;
-	for (int i = 0; i < descriptors1.rows; i++) {
-		double dist = matches[i].distance;
-		if (dist < min_dist) min_dist = dist;
-		if (dist > max_dist) max_dist = dist;
-	}
-	vector<DMatch> good_matches;
-	for (int i = 0; i < descriptors1.rows; i++) {
-		if (matches[i].distance <= max(2 * min_dist, 0.02)) {
-			good_matches.push_back(matches[i]);
+	// Apply ratio test
+	vector<vector<DMatch>> knnMatches;
+	matcher.knnMatch(descriptors1, descriptors2, knnMatches, 2);
+
+	const float ratio_thresh = 0.75f;
+	vector<DMatch> goodMatches;
+	for (size_t i = 0; i < knnMatches.size(); i++) {
+		if (knnMatches[i][0].distance < ratio_thresh * knnMatches[i][1].distance) {
+			goodMatches.push_back(knnMatches[i][0]);
 		}
 	}
 
-	return good_matches;
+	return goodMatches;
 }

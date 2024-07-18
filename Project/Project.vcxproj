@@ -165,12 +165,18 @@
     <ClInclude Include="log_gabor_FeatureDetection.h" />
     <ClInclude Include="orb_FeatureDescriptor.h" />
     <ClInclude Include="ransac_ImageStitching.h" />
-    <ClInclude Include="shift_FeatureDetection.h" />
+    <ClInclude Include="sift_FeatureDetection.h" />
     <ClInclude Include="shi_tomasi_FeatureDetection.h" />
     <ClInclude Include="sift_FeatureDescriptor.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="orb_FeatureDetection.h" />
     <ClInclude Include="warpPerspective&amp;Blending_ImageStitching.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Materiale\facade\DSC_0362.JPG" />
+    <Image Include="..\Materiale\facade\DSC_0363.JPG" />
+    <Image Include="..\Materiale\office\DSC_0219.JPG" />
+    <Image Include="..\Materiale\office\DSC_0220.JPG" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

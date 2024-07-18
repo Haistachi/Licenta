@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "imgShow.h"
+#include "imageOp.h"
 
 using namespace cv;
 using namespace std;
 
-void showFeature(const string& title, Mat dst, vector<Point2f> corners)
+void showFeature(const string& title, Mat& dst, vector<Point2f> corners)
 {
 	RNG rng(12345);
 	cout << "** Number of corners detected: " << corners.size() << endl;
@@ -13,8 +14,8 @@ void showFeature(const string& title, Mat dst, vector<Point2f> corners)
 	{
 		circle(dst, corners[i], radius, Scalar(rng.uniform(0, 255), rng.uniform(0, 256), rng.uniform(0, 256)), FILLED);
 	}
-
-	imshow(title, dst);
+	Mat displayImg = resizeForDisplay(dst);
+	imshow(title, displayImg);
 }
 
 void showFeature(const string& title, Mat& dst)
@@ -24,12 +25,14 @@ void showFeature(const string& title, Mat& dst)
 
 	normalize(dst, dst_norm, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
 	convertScaleAbs(dst_norm, dst_norm_scaled);
-	imshow(title, dst_norm_scaled);
+	Mat displayImg = resizeForDisplay(dst_norm_scaled);
+	imshow(title, displayImg);
 }
 
 void showFeature(const string& title, Mat& dst, vector<KeyPoint> keyPoints)
 {
 	Mat img_keypoints;
 	drawKeypoints(dst, keyPoints, img_keypoints, Scalar::all(-1), DrawMatchesFlags::DEFAULT);
-	imshow(title, img_keypoints);
+	Mat displayImg = resizeForDisplay(img_keypoints);
+	imshow(title, displayImg);
 }

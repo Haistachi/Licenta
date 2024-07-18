@@ -44,4 +44,5 @@ vector<DMatch> flannfeatureMatching(Mat& src_gray1, Mat& src_gray2,
     FlannBasedMatcher matcher;
     vector<DMatch> matches;
     matcher.match(descriptors1, descriptors2, matches);
+    return matches;
 }

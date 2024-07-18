@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "imageOp.h"
+#include "featureDetection.h"
+#include "featureDescriptor.h"
+#include "featureMatching.h"
 
 using namespace cv;
 using namespace std;
@@ -47,3 +50,68 @@ void limitKeyPoints(vector<KeyPoint> &keypoints, int maxKeypoints)
         keypoints.resize(maxKeypoints);
     }
 }
+
+Mat resizeForDisplay(const Mat& image) {
+    Mat displayImg;
+    if (image.rows > maxDisplayHeight) {
+        double ratio = maxDisplayHeight / image.rows;
+        cv::resize(image, displayImg, cv::Size(), ratio, ratio);
+    }
+    else {
+        displayImg = image.clone();
+    }
+    return displayImg;
+}
+
+void customFeatureDetection(const Mat& image, vector<KeyPoint>& keypoints, Mat& descriptors, string detector, string descriptor) {
+	Mat src= image.clone();
+
+	if (detector == "FAST") {
+		keypoints = fastDetectKeyPoints(src);
+	}
+	else if (detector == "HARIS") {
+		keypoints = harrisDetectKeyPoints(src);
+	}
+	else if (detector == "SHITOM") {
+		keypoints = shiTomasiDetectKeyPoints(src);
+	}
+	else if (detector == "ORB") {
+		keypoints = orbDetectKeyPoints(src);
+	}
+	else if (detector == "SIFT") {
+		keypoints = siftDetectKeyPoints(src);
+	}
+	else {
+		keypoints = fastDetectKeyPoints(src);
+	}
+
+	if (descriptor == "BRIEF") {
+		descriptors =  briefDescriptors(src, keypoints);
+	}
+	else if (descriptor == "FREAK") {
+		descriptors = freakDescriptors(src, keypoints);
+	}
+	else if (descriptor == "ORB") {
+		descriptors = orbDescriptors(src, keypoints);
+	}
+	else if (descriptor == "SIFT") {
+		descriptors = siftDescriptors(src, keypoints);
+	}
+	else {
+		descriptors = briefDescriptors(src, keypoints);
+	}
+}
+
+vector<DMatch> featureMatching(Mat& src_gray1, Mat& src_gray2,
+	Mat& descriptors1, Mat& descriptors2,
+	vector<KeyPoint> keypoints1, vector<KeyPoint> keypoints2,
+	string matcher, string alg)
+{
+	if(matcher._Equal("FLANN"))
+		return flannfeatureMatching(src_gray1, src_gray2, descriptors1, descriptors2, keypoints1, keypoints2);
+	else if(matcher._Equal("BFM"))
+		return bfmFeatureMatching(src_gray1, src_gray2, descriptors1, descriptors2, alg);
+	else
+		return bfmFeatureMatching(src_gray1, src_gray2, descriptors1, descriptors2, alg);
+}
+
