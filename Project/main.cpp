@@ -42,7 +42,7 @@ int main()
     Mat descriptors1, descriptors2;
     std::string detector = "ORB";
     std::string descriptor = "ORB";
-    std::string matcher = "FLANN";
+    std::string matcher = "BFM";
 
     customFeatureDetection(img1_gray, keypoints1, descriptors1, detector, descriptor);
     customFeatureDetection(img2_gray, keypoints2, descriptors2, detector, descriptor);
@@ -62,9 +62,9 @@ int main()
     }
 
     Mat H = findHomography(points1, points2, RANSAC);
-
+    
     Mat result;
-    warpPerspective(img2, result, H, Size(img1.cols * 1.5, img1.rows * 1.5));
+    warpPerspective(img2, result, H, Size(img1.cols + img2.cols, img1.rows));
 
     Mat half(result, Rect(0, 0, img1.cols, img1.rows));
     img1.copyTo(half);
