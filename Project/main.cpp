@@ -71,6 +71,7 @@ int main()
 
     Mat blendedDisplay = resizeForDisplay(result);
     imshow("Warped Image", blendedDisplay);
+    imwrite("facade_blended.jpg", result);
 
     waitKey(0);
     return 0;

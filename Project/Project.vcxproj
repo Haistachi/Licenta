@@ -175,8 +175,10 @@
   <ItemGroup>
     <Image Include="..\Materiale\facade\DSC_0362.JPG" />
     <Image Include="..\Materiale\facade\DSC_0363.JPG" />
+    <Image Include="..\Materiale\facade\facade_blended.jpg" />
     <Image Include="..\Materiale\office\DSC_0219.JPG" />
     <Image Include="..\Materiale\office\DSC_0220.JPG" />
+    <Image Include="..\Materiale\office\office_blended.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

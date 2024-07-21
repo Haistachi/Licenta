@@ -199,5 +199,11 @@
     <Image Include="..\Materiale\facade\DSC_0363.JPG">
       <Filter>images\facade</Filter>
     </Image>
+    <Image Include="..\Materiale\office\office_blended.jpg">
+      <Filter>images\office</Filter>
+    </Image>
+    <Image Include="..\Materiale\facade\facade_blended.jpg">
+      <Filter>images\facade</Filter>
+    </Image>
   </ItemGroup>
 </Project>
