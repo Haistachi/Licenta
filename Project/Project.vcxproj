@@ -130,6 +130,7 @@
     <ClCompile Include="bfm_FeatureMatching.cpp" />
     <ClCompile Include="brief_FeatureDescriptor.cpp" />
     <ClCompile Include="common.cpp" />
+    <ClCompile Include="evaluation.cpp" />
     <ClCompile Include="fast_FeatureDetection.cpp" />
     <ClCompile Include="flann_FeatureMatching.cpp" />
     <ClCompile Include="freak_FeatureDescriptor.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="bfm_FeatureMatching.h" />
     <ClInclude Include="brief_FeatureDescriptor.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="evaluation.h" />
     <ClInclude Include="fast_FeatureDetection.h" />
     <ClInclude Include="featureDescriptor.h" />
     <ClInclude Include="featureDetection.h" />

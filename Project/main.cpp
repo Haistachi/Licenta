@@ -2,6 +2,7 @@
 #include "imageOp.h"
 #include "imageControl.h"
 #include "featureDetection.h"
+#include "evaluation.h"
 
 int main()
 {
@@ -70,8 +71,11 @@ int main()
     img1.copyTo(half);
 
     Mat blendedDisplay = resizeForDisplay(result);
+
+    evaluateFeatureMatchingToFile(img1_gray, img2_gray, H, keypoints1, keypoints2, goodMatches, img1_gray.size());
     imshow("Warped Image", blendedDisplay);
     imwrite("facade_blended.jpg", result);
+    
 
     waitKey(0);
     return 0;

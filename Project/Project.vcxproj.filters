@@ -46,14 +46,20 @@
     <Filter Include="Source Files\featureMatching">
       <UniqueIdentifier>{ffa5cfb9-d7ce-4c91-a054-c9e8a5a226e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="images">
+    <Filter Include="Resource Files\images">
       <UniqueIdentifier>{78f0bbc0-73d7-4135-a8a7-c97013423d58}</UniqueIdentifier>
     </Filter>
-    <Filter Include="images\office">
+    <Filter Include="Resource Files\images\office">
       <UniqueIdentifier>{281100b2-73de-412b-9948-6f1ec3e176c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="images\facade">
+    <Filter Include="Resource Files\images\facade">
       <UniqueIdentifier>{91b6ab71-457e-4fd7-8c25-235cef246c6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\evaluation">
+      <UniqueIdentifier>{ed878f89-a8b4-4c0f-acbd-8a76dc376889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\evaluation">
+      <UniqueIdentifier>{ae03fa9d-6a1f-4bfc-a966-73be4e9beb82}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="warpPerspective&amp;Blending_ImageStitching.cpp">
       <Filter>Source Files\imageSttiching</Filter>
+    </ClCompile>
+    <ClCompile Include="evaluation.cpp">
+      <Filter>Source Files\evaluation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,25 +194,28 @@
     <ClInclude Include="warpPerspective&amp;Blending_ImageStitching.h">
       <Filter>Header Files\imageStitchingHeader</Filter>
     </ClInclude>
+    <ClInclude Include="evaluation.h">
+      <Filter>Header Files\evaluation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Materiale\office\DSC_0220.JPG">
-      <Filter>images\office</Filter>
+      <Filter>Resource Files\images\office</Filter>
     </Image>
     <Image Include="..\Materiale\office\DSC_0219.JPG">
-      <Filter>images\office</Filter>
+      <Filter>Resource Files\images\office</Filter>
     </Image>
     <Image Include="..\Materiale\facade\DSC_0362.JPG">
-      <Filter>images\facade</Filter>
+      <Filter>Resource Files\images\facade</Filter>
     </Image>
     <Image Include="..\Materiale\facade\DSC_0363.JPG">
-      <Filter>images\facade</Filter>
+      <Filter>Resource Files\images\facade</Filter>
     </Image>
     <Image Include="..\Materiale\office\office_blended.jpg">
-      <Filter>images\office</Filter>
+      <Filter>Resource Files\images\office</Filter>
     </Image>
     <Image Include="..\Materiale\facade\facade_blended.jpg">
-      <Filter>images\facade</Filter>
+      <Filter>Resource Files\images\facade</Filter>
     </Image>
   </ItemGroup>
 </Project>
