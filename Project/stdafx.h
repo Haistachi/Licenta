@@ -26,8 +26,9 @@ using namespace std;
 #define max_(x,y) ((x) > (y) ? (x) : (y))
 #define min_(x,y) ((x) < (y) ? (x) : (y))
 #define isNan(x) ((x) != (x) ? 1 : 0)
-
-#define maxDisplayHeight 540.0
+#define isInf(x) ((x) == POS_INFINITY || (x) == NEG_INFINITY ? 1 : 0)
+#define MAX_DYSPLAY_HEIGHT 540.0
+#define MAX_DYSPLAY_WIDTH 960.0
 
 #pragma once
 
