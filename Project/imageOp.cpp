@@ -32,13 +32,37 @@ Mat readImage()
 {
     Mat src;
     std::string fname = openFileDialog();
-    src = imread(fname, IMREAD_COLOR); // CV_LOAD_IMAGE_COLOR is deprecated, use IMREAD_COLOR
+    src = imread(fname, IMREAD_COLOR);
+    return src;
+}
+
+Mat readImage(string& name)
+{
+    Mat src;
+    std::string fname = openFileDialog();
+
+    if (fname.empty()) {
+        std::cerr << "No file selected!" << std::endl;
+        return src;
+    }
+
+    src = imread(fname, IMREAD_COLOR);
+
+    if (src.empty()) {
+        std::cerr << "Error: Could not load image: " << fname << std::endl;
+    }
+
+    size_t lastSlash = fname.find_last_of("\\/");
+    string fileName = fname.substr(lastSlash + 1);
+    size_t lastDot = fileName.find_last_of(".");
+    name = fileName.substr(0, lastDot);
+
     return src;
 }
 
 void convertToGray(Mat& src, Mat& dst)
 {
-    cvtColor(src, dst, COLOR_RGB2GRAY); // CV_RGB2GRAY is deprecated, use COLOR_RGB2GRAY
+    cvtColor(src, dst, COLOR_RGB2GRAY);
 }
 
 void limitKeyPoints(vector<KeyPoint>& keypoints, int maxKeypoints)
@@ -51,11 +75,11 @@ void limitKeyPoints(vector<KeyPoint>& keypoints, int maxKeypoints)
     }
 }
 
-Mat resizeForDisplay(const Mat& image) {
+Mat resizeForDisplay(const Mat image) {
     Mat displayImg;
     if (image.rows > MAX_DYSPLAY_HEIGHT) {
         double ratio = static_cast<double>(MAX_DYSPLAY_HEIGHT) / image.rows;
-        cv::resize(image, displayImg, cv::Size(), ratio, ratio);
+        resize(image, displayImg, cv::Size(), ratio, ratio);
     }
     else {
         displayImg = image.clone();
@@ -63,16 +87,16 @@ Mat resizeForDisplay(const Mat& image) {
     return displayImg;
 }
 
-void customFeatureDetection(const Mat& image, vector<KeyPoint>& keypoints, Mat& descriptors, string detector, string descriptor) {
+void customFeatureDetection(const Mat& image, vector<KeyPoint>& keypoints, Mat& descriptors, string detector, string descriptor, const string& imageName) {
     Mat src = image.clone();
 
     if (detector == "FAST") {
         keypoints = fastDetectKeyPoints(src);
     }
-    else if (detector == "HARRIS") { // Corrected "HARIS" to "HARRIS"
+    else if (detector == "HARRIS") {
         keypoints = harrisDetectKeyPoints(src);
     }
-    else if (detector == "SHITOMASI") { // Corrected "SHITOM" to "SHITOMASI"
+    else if (detector == "SHITOMASI") {
         keypoints = shiTomasiDetectKeyPoints(src);
     }
     else if (detector == "ORB") {
@@ -81,39 +105,43 @@ void customFeatureDetection(const Mat& image, vector<KeyPoint>& keypoints, Mat& 
     else if (detector == "SIFT") {
         keypoints = siftDetectKeyPoints(src);
     }
+    else if (detector == "LOGGABOR") {
+        keypoints = detectLogGaborMultiScaleKeypoints(src, imageName);
+    }
     else {
         keypoints = fastDetectKeyPoints(src);
     }
 
+    vector<KeyPoint> keypointsCopy = keypoints;
     if (descriptor == "BRIEF") {
-        descriptors = briefDescriptors(src, keypoints);
+        descriptors = briefDescriptors(src, keypointsCopy);
     }
     else if (descriptor == "FREAK") {
-        descriptors = freakDescriptors(src, keypoints);
+        descriptors = freakDescriptors(src, keypointsCopy);
     }
     else if (descriptor == "ORB") {
-        descriptors = orbDescriptors(src, keypoints);
+        descriptors = orbDescriptors(src, keypointsCopy);
     }
     else if (descriptor == "SIFT") {
-        descriptors = siftDescriptors(src, keypoints);
+        descriptors = siftDescriptors(src, keypointsCopy);
     }
     else {
-        descriptors = briefDescriptors(src, keypoints);
+        descriptors = briefDescriptors(src, keypointsCopy);
     }
 }
 
-vector<DMatch> featureMatching(Mat& src_gray1, Mat& src_gray2,
+vector<DMatch> customFeatureMatching(Mat& src_gray1, Mat& src_gray2,
     Mat& descriptors1, Mat& descriptors2,
     vector<KeyPoint> keypoints1, vector<KeyPoint> keypoints2,
     string matcher, string alg)
 {
     if (matcher == "FLANN") {
-        return flannfeatureMatching(src_gray1, src_gray2, descriptors1, descriptors2, keypoints1, keypoints2);
+        return flannfeatureMatchingEvaluated(src_gray1, src_gray2, descriptors1, descriptors2);
     }
     else if (matcher == "BFM") {
-        return bfmFeatureMatching(src_gray1, src_gray2, descriptors1, descriptors2, alg);
+        return bfmFeatureMatchingEvaluated(src_gray1, src_gray2, descriptors1, descriptors2, alg);
     }
     else {
-        return bfmFeatureMatching(src_gray1, src_gray2, descriptors1, descriptors2, alg);
+        return bfmFeatureMatchingEvaluated(src_gray1, src_gray2, descriptors1, descriptors2, alg);
     }
 }

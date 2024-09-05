@@ -1,0 +1,7 @@
+Orientation: 0.523599
+Wavelength: 5.12993
+SigmaOnf: 0.55
+ThetaSigma: 1
+Threshold: 0.7
+Cutoff: 0.45
+Sharpness: 15

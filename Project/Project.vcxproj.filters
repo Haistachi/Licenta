@@ -19,9 +19,6 @@
     <Filter Include="Source Files\featureDetection">
       <UniqueIdentifier>{ddbf235d-387f-4152-b5a0-5757138406b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\common">
-      <UniqueIdentifier>{c948a3a3-045d-4e13-bfa2-794dd4623522}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\imageControl">
       <UniqueIdentifier>{96c7d1fd-d096-4253-b226-9ca016a318e3}</UniqueIdentifier>
     </Filter>
@@ -93,9 +90,6 @@
     <ClCompile Include="log_gabor_FeatureDetection.cpp">
       <Filter>Source Files\featureDetection</Filter>
     </ClCompile>
-    <ClCompile Include="common.cpp">
-      <Filter>Source Files\common</Filter>
-    </ClCompile>
     <ClCompile Include="sift_FeatureDescriptor.cpp">
       <Filter>Source Files\featureDescriptor</Filter>
     </ClCompile>
@@ -127,9 +121,6 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="common.h">
-      <Filter>Source Files\common</Filter>
     </ClInclude>
     <ClInclude Include="fast_FeatureDetection.h">
       <Filter>Header Files\featureDetectionHeader</Filter>

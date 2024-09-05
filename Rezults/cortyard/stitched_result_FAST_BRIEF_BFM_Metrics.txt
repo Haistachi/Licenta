@@ -1,0 +1,9 @@
+Inlier Ratio: 0.000610277
+Reprojection Error: 1943.04
+Number of Good Matches: 8193
+Processing Time (ms): 34242
+Number of Keypoints in DSC_0295 : 44880
+Number of Keypoints in DSC_0296 : 38226
+Keypoint Detection Threshold: 0.7
+Number of successful descriptions for DSC_0295 : 44547
+Number of successful descriptions for DSC_0296 : 37954

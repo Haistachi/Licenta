@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <opencv2/core/base.hpp>
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
@@ -11,6 +13,7 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <SDKDDKVer.h>
+#define NOMINMAX
 #include <windows.h>
 #include <CommDlg.h>
 #include <ShlObj.h>
@@ -29,6 +32,12 @@ using namespace std;
 #define isInf(x) ((x) == POS_INFINITY || (x) == NEG_INFINITY ? 1 : 0)
 #define MAX_DYSPLAY_HEIGHT 540.0
 #define MAX_DYSPLAY_WIDTH 960.0
+#define MAX_IMAGE_HEIGHT 1080.0
+#define MAX_IMAGE_WIDTH 1920.0
+#define MAX_IMAGE_SIZE 2073600.0
+#define MAX_DISPLAY_SIZE 518400.0
+#define DISTANCE_THRESHOLD 1.0
 
+const double thresholdKeypoint = 0.7;    // Keypoint detection threshold
 #pragma once
 

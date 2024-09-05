@@ -1,8 +1,0 @@
-Feature Matching Evaluation:
-Recall: 0
-Spread Overlap: 0.00260417
-Feature Distance: 1519.79
-Feature Density: 0.00260417
-Score: 151.98
-Precision: 0
-F1 Score: -nan(ind)

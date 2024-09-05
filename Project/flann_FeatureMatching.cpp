@@ -1,11 +1,10 @@
 #include "stdafx.h"
 #include "flann_FeatureMatching.h"
+#include "evaluation.h"
 
-vector<DMatch> flannfeatureMatching(Mat& src_gray1, Mat& src_gray2,
-	Mat& descriptors1, Mat& descriptors2,
-	vector<KeyPoint> keypoints1, vector<KeyPoint> keypoints2)
+vector<DMatch> flannfeatureMatchingEvaluated(Mat& src_gray1, Mat& src_gray2,
+    Mat& descriptors1, Mat& descriptors2)
 {
-    // Convert descriptors to the type CV_32F needed for FLANN
     if (descriptors1.type() != CV_32F) {
         descriptors1.convertTo(descriptors1, CV_32F);
     }
@@ -15,34 +14,10 @@ vector<DMatch> flannfeatureMatching(Mat& src_gray1, Mat& src_gray2,
 
     // Use FLANN matcher
     FlannBasedMatcher matcher;
-    vector<vector<DMatch>> knnMatches;
-    matcher.knnMatch(descriptors1, descriptors2, knnMatches, 2);
-
-    // Apply Lowe's ratio test
-    const float ratio_thresh = 0.7f; // Commonly used threshold
-    vector<DMatch> goodMatches;
-    for (size_t i = 0; i < knnMatches.size(); i++) {
-        if (knnMatches[i][0].distance < ratio_thresh * knnMatches[i][1].distance) {
-            goodMatches.push_back(knnMatches[i][0]);
-        }
-    }
-
+    vector<DMatch> matches1to2, matches2to1, consistentMatches;
+    matcher.match(descriptors1, descriptors2, matches1to2);
+    matcher.match(descriptors2, descriptors1, matches2to1);
+    consistentMatches = crossValidationCheck(descriptors1, descriptors2, matches1to2, matches2to1);
+    vector<DMatch> goodMatches = filterMatchesByDynamicThreshold(consistentMatches);
     return goodMatches;
-}
-
-vector<DMatch> flannfeatureMatching(Mat& src_gray1, Mat& src_gray2,
-	Mat& descriptors1, Mat& descriptors2)
-{
-    if (descriptors1.type() != CV_32F) {
-        descriptors1.convertTo(descriptors1, CV_32F);
-    }
-    if (descriptors2.type() != CV_32F) {
-        descriptors2.convertTo(descriptors2, CV_32F);
-    }
-
-    // Use FLANN matcher
-    FlannBasedMatcher matcher;
-    vector<DMatch> matches;
-    matcher.match(descriptors1, descriptors2, matches);
-    return matches;
 }

@@ -1,41 +1,25 @@
 #include "stdafx.h"
 #include "shi_tomasi_FeatureDetection.h"
 
-using namespace cv;
-using namespace std;
-
-vector<Point2f> detectShiTomasi(Mat& src_gray)
-{
-	int maxCorners = 100;
-	double qualityLevel = 0.01;
-	double minDistance = 10;
-	int blockSize = 3, gradientSize = 3;
-	bool useHarrisDetector = false;
-	double k = 0.04;
-	vector<Point2f> c;
-	goodFeaturesToTrack(src_gray, c, maxCorners, qualityLevel, minDistance, Mat(), blockSize, useHarrisDetector, k);
-	return c;
+// Function to detect Shi-Tomasi corners and return them
+vector<Point2f> detectShiTomasi(Mat& src_gray) {
+    const int maxCorners = 100000;
+    const double qualityLevel = 0.01;
+    const double minDistanceST = 10;
+    const int blockSize = 3, gradientSize = 3;
+    const bool useHarrisDetector = false;
+    const double k = 0.04;
+    vector<Point2f> corners;
+    goodFeaturesToTrack(src_gray, corners, maxCorners, qualityLevel, minDistanceST, Mat(), blockSize, useHarrisDetector, k);
+    return corners;
 }
 
-void showFeature(Mat dst, vector<Point2f> corners)
-{
-	RNG rng(12345);
-	cout << "** Number of corners detected: " << corners.size() << endl;
-	int radius = 4;
-	for (size_t i = 0; i < corners.size(); i++)
-	{
-		circle(dst, corners[i], radius, Scalar(rng.uniform(0, 255), rng.uniform(0, 256), rng.uniform(0, 256)), FILLED);
-	}
-
-	imshow("source_window", dst);
-}
-
-vector<KeyPoint> shiTomasiDetectKeyPoints(Mat& image)
-{
-	vector<Point2f> corners = detectShiTomasi(image);
-	vector<KeyPoint> keyPoints;
-	for (Point2f corner : corners) {
-		keyPoints.push_back(KeyPoint(corner, 1.f));
-	}
-	return keyPoints;
+// Function to convert Shi-Tomasi corners to KeyPoints
+vector<KeyPoint> shiTomasiDetectKeyPoints(Mat& image) {
+    vector<Point2f> corners = detectShiTomasi(image);
+    vector<KeyPoint> keyPoints;
+    for (Point2f corner : corners) {
+        keyPoints.push_back(KeyPoint(corner, 1.f));
+    }
+    return keyPoints;
 }

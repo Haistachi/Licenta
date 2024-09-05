@@ -36,3 +36,29 @@ void showFeature(const string& title, Mat& dst, vector<KeyPoint> keyPoints)
 	Mat displayImg = resizeForDisplay(img_keypoints);
 	imshow(title, displayImg);
 }
+
+void drawKeypointsOnImage(Mat& image, const vector<KeyPoint>& keypoints, const Scalar& color, int thickness) {
+	for (const KeyPoint& kp : keypoints) {
+		Point center(cvRound(kp.pt.x), cvRound(kp.pt.y));
+		int radius = cvRound(kp.size / 2);
+		circle(image, center, radius, color, thickness);
+	}
+}
+
+void drawKeypointsOnImageShow(Mat& image, const vector<KeyPoint>& keypoints, const Scalar& color, int thickness) {
+	for (const KeyPoint& kp : keypoints) {
+		Point center(cvRound(kp.pt.x), cvRound(kp.pt.y));
+		int radius = cvRound(kp.size / 2);
+		circle(image, center, radius, color, thickness);
+	}
+	imshow("Keypoints", image);
+	waitKey(0);
+}
+
+void showImagesProcesed(Mat& imgMatches, Mat& result)
+{
+	Mat imgMatchesDisplay = resizeForDisplay(imgMatches);
+	Mat resultDisplay = resizeForDisplay(result);
+	imshow("Matches", imgMatchesDisplay);
+	imshow("Stitched Image", resultDisplay);
+}
